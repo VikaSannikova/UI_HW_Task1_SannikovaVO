@@ -1,0 +1,2 @@
+book 1 Classic 4 1000.0 Tarasov 1@.com Man
+bird 3 Fantasy 7 1050.0 Pushkina 123@.com Woman

@@ -114,6 +114,16 @@ public class Swing extends JFrame {
                             boolean flag = true;
                             int q = 0;
                             double pr =0;
+
+                            if((bookName.getText().isEmpty())||(edition.getText().isEmpty())||(authorName.getText().isEmpty())||(email.getText().isEmpty())){
+                                JDialog error = new JDialog(); //если одно из стринговых полей пустое, то ошибка
+                                error.setSize(175, 150);
+                                error.setLocation(w + width/2 - error.getWidth()/2, h+height/2-error.getHeight()/2);
+                                error.add(new JLabel("Empry fields!"));
+                                error.setModal(true);
+                                error.setVisible(true);
+                                flag = false;
+                            }
                                 q = Integer.valueOf(qty.getText());
                                 pr = Double.valueOf(price.getText());
                                 pri.setForeground(Color.BLACK);
@@ -147,15 +157,6 @@ public class Swing extends JFrame {
                                     flag = false;
                                 }
 
-                            if((bookName.getText().isEmpty())||(edition.getText().isEmpty())||(authorName.getText().isEmpty())||(email.getText().isEmpty())){
-                                JDialog error = new JDialog(); //если одно из стринговых полей пустое, то ошибка
-                                error.setSize(175, 150);
-                                error.setLocation(w + width/2 - error.getWidth()/2, h+height/2-error.getHeight()/2);
-                                error.add(new JLabel("Empry fields!"));
-                                error.setModal(true);
-                                error.setVisible(true);
-                                flag = false;
-                            }
 
                             if(flag) { //если все топ, то отправляем в наш bookmodel
                                 m.setBook(row,new Book(bookName.getText(),edition.getText(),(Genre) genre.getSelectedItem(), new Author(authorName.getText(), email.getText(), (Gender)gender.getSelectedItem()), pr, q));
@@ -261,6 +262,17 @@ public class Swing extends JFrame {
                         boolean flag = true;
                         int q = 0;
                         double pr =0;
+
+
+                        if((bookName.getText().isEmpty())||(edition.getText().isEmpty())||(authorName.getText().isEmpty())||(email.getText().isEmpty())){
+                            JDialog error = new JDialog();//если пустые стринги
+                            error.setSize(175, 150);
+                            error.setLocation(w + width/2 - error.getWidth()/2, h+height/2-error.getHeight()/2);
+                            error.add(new JLabel("  Remained Empty Field!"));
+                            error.setModal(true);
+                            error.setVisible(true);
+                            flag = false;
+                        }
                             q = Integer.valueOf(qty.getText());
                             pr = Double.valueOf(price.getText());
                             pri.setForeground(Color.BLACK);
@@ -295,15 +307,7 @@ public class Swing extends JFrame {
                                 flag = false;
                             }
 
-                        if((bookName.getText().isEmpty())||(edition.getText().isEmpty())||(authorName.getText().isEmpty())||(email.getText().isEmpty())){
-                            JDialog error = new JDialog();//если пустые стринги
-                            error.setSize(175, 150);
-                            error.setLocation(w + width/2 - error.getWidth()/2, h+height/2-error.getHeight()/2);
-                            error.add(new JLabel("  Remained Empty Field!"));
-                            error.setModal(true);
-                            error.setVisible(true);
-                            flag = false;
-                        }
+
 
                         if(flag) { //все топ, грузим в форму
                             m.addBook(new Book(bookName.getText(), edition.getText(), (Genre) genre.getSelectedItem(),new Author(authorName.getText(), email.getText(), (Gender)gender.getSelectedItem()), pr, q));
