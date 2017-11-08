@@ -26,6 +26,7 @@ public class Swing extends JFrame {
         genre.addItem(Genre.Detective);
         genre.addItem(Genre.Fantasy);
         genre.addItem(Genre.Scientific);
+
         final JTextField qty = new JTextField();
         final JTextField price = new JTextField();
         final JTextField authorName = new JTextField();
@@ -42,7 +43,7 @@ public class Swing extends JFrame {
         JPanel grid = new JPanel(new GridLayout(3, 1, 0, 5));
 
 
-        final boolean[] isDelete = {false};
+        final boolean[] isDelete = {false}; //как обойти это?
         final boolean[] isChange = {false};
 
         table.addMouseListener(new MouseListener() {
@@ -389,7 +390,7 @@ public class Swing extends JFrame {
                 boolean flag = true;
                 m.clear();
                 JFileChooser openFile = new JFileChooser();
-                openFile.setCurrentDirectory(new File(".")); 
+                openFile.setCurrentDirectory(new File("."));
                 int res = openFile.showDialog(null, "Open file");
                 if (res == JFileChooser.APPROVE_OPTION) {
                     File file = openFile.getSelectedFile();
