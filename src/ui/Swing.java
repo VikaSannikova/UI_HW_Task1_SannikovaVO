@@ -6,10 +6,6 @@ import java.awt.event.*;
 import java.io.File;
 import java.io.IOException;
 
-/**
- * Created by Boris on 05.11.2017.
- */
-
 public class Swing extends JFrame {
     public Swing() {
         super("Books");
@@ -22,7 +18,7 @@ public class Swing extends JFrame {
         setLocation(w, h);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
 
-        final JTextField bookName = new JTextField(); //создаем текстовые поля
+        final JTextField bookName = new JTextField();
         final JTextField edition = new JTextField();
         final JComboBox genre = new JComboBox();
         genre.addItem(Genre.Classic);
@@ -34,26 +30,26 @@ public class Swing extends JFrame {
         final JTextField price = new JTextField();
         final JTextField authorName = new JTextField();
         final JTextField email = new JTextField();
-        final JComboBox gender = new JComboBox();//это выпадающий список для полов
+        final JComboBox gender = new JComboBox();
         gender.addItem(Gender.Man);
         gender.addItem(Gender.Woman);
 
-        final Library m = new Library(); ////////////////////////////////////////////////что такое bookmodel
+        final Library m = new Library();
 
-        final JTable table = new JTable(m); //создаем табличку
-        JScrollPane jScrollPane = new JScrollPane(table); //херовина для прогрутки
-        add(jScrollPane, BorderLayout.CENTER); //добавить херовину по центру
+        final JTable table = new JTable(m);
+        JScrollPane jScrollPane = new JScrollPane(table);
+        add(jScrollPane, BorderLayout.CENTER);
         JPanel grid = new JPanel(new GridLayout(3, 1, 0, 5));
 
 
-        final boolean[] isDelete = {false}; //массив делитов
-        final boolean[] isChange = {false}; //массив измененных
+        final boolean[] isDelete = {false};
+        final boolean[] isChange = {false};
 
-        table.addMouseListener(new MouseListener() { //херовина которая реагирует на мышку
+        table.addMouseListener(new MouseListener() {
             @Override
-            public void mouseClicked(MouseEvent e) { //событие - клик мышки
+            public void mouseClicked(MouseEvent e) {
                 final int row = table.rowAtPoint(e.getPoint());
-                if (isDelete[0]) { //если нажата кнопака delete, то мы сожем удалить эту строчку из таблички
+                if (isDelete[0]) {
                     m.deleteBook(row);
                     isDelete[0] = false;
                 }
@@ -69,7 +65,7 @@ public class Swing extends JFrame {
                     dialog.setModal(true);
                     JPanel panel = new JPanel(new GridLayout(8, 2, 5, 5));
 
-                    bookName.setText(book.getName()); //заполняем исходными данными нашу форму
+                    bookName.setText(book.getName());
                     edition.setText(book.getEdition());
                     genre.setSelectedItem(book.getGenre());
                     qty.setText(String.valueOf(book.getQty()));
@@ -108,7 +104,7 @@ public class Swing extends JFrame {
                     dialog.add(panel);
 
                     JButton ok = new JButton("OK");
-                    ok.addActionListener(new ActionListener() { //что будет если нажать кнопку ОК
+                    ok.addActionListener(new ActionListener() {
                         @Override
                         public void actionPerformed(ActionEvent e) {
                             boolean flag = true;
@@ -116,7 +112,7 @@ public class Swing extends JFrame {
                             double pr =0;
 
                             if((bookName.getText().isEmpty())||(edition.getText().isEmpty())||(authorName.getText().isEmpty())||(email.getText().isEmpty())){
-                                JDialog error = new JDialog(); //если одно из стринговых полей пустое, то ошибка
+                                JDialog error = new JDialog();
                                 error.setSize(175, 150);
                                 error.setLocation(w + width/2 - error.getWidth()/2, h+height/2-error.getHeight()/2);
                                 error.add(new JLabel("Empry fields!"));
@@ -158,17 +154,17 @@ public class Swing extends JFrame {
                                 }
 
 
-                            if(flag) { //если все топ, то отправляем в наш bookmodel
+                            if(flag) {
                                 m.setBook(row,new Book(bookName.getText(),edition.getText(),(Genre) genre.getSelectedItem(), new Author(authorName.getText(), email.getText(), (Gender)gender.getSelectedItem()), pr, q));
                                 dialog.dispose();
                             }
                         }
                     });
 
-                    dialog.add(ok,BorderLayout.SOUTH); //располагаем кнопку на ЮГ
-                    dialog.setVisible(true); //отрисовываем
+                    dialog.add(ok,BorderLayout.SOUTH);
+                    dialog.setVisible(true);
 
-                    isChange[0] = false; //кнопка change разжимается
+                    isChange[0] = false;
                 }
             }
 
@@ -194,7 +190,7 @@ public class Swing extends JFrame {
         });
 
 
-        final JButton create = new JButton("Create"); create.setEnabled(false); //создаем кнопки
+        final JButton create = new JButton("Create"); create.setEnabled(false);
         final JButton delete = new JButton("Delete"); delete.setEnabled(false);
         final JButton change = new JButton("Change");change.setEnabled(false);
 
@@ -202,24 +198,24 @@ public class Swing extends JFrame {
 
 
 
-        delete.addActionListener(new ActionListener() { //установление события на кнопку delete
+        delete.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 isDelete[0] = true;
             }
         });
 
-        change.addActionListener(new ActionListener() { //установление события на кнопку change
+        change.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 isChange[0] = true;
             }
         });
 
-        create.addActionListener(new ActionListener() { //установление события на кнопку create
+        create.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                final JDialog dialog = new JDialog(); //тут окошко в такой фигней
+                final JDialog dialog = new JDialog();
                 dialog.setSize(350, 250);
                 dialog.setLocation(w + width/2 - dialog.getWidth()/2, h+height/2-dialog.getHeight()/2);
                 dialog.setTitle("New book");
@@ -253,7 +249,7 @@ public class Swing extends JFrame {
                 panel.add(new JLabel("Gender:"));
                 panel.add(gender);
 
-                dialog.add(panel); //добавляем все в окошко
+                dialog.add(panel);
 
                 JButton ok = new JButton("OK");
                 ok.addActionListener(new ActionListener() {
@@ -265,7 +261,7 @@ public class Swing extends JFrame {
 
 
                         if((bookName.getText().isEmpty())||(edition.getText().isEmpty())||(authorName.getText().isEmpty())||(email.getText().isEmpty())){
-                            JDialog error = new JDialog();//если пустые стринги
+                            JDialog error = new JDialog();
                             error.setSize(175, 150);
                             error.setLocation(w + width/2 - error.getWidth()/2, h+height/2-error.getHeight()/2);
                             error.add(new JLabel("  Remained Empty Field!"));
@@ -309,7 +305,7 @@ public class Swing extends JFrame {
 
 
 
-                        if(flag) { //все топ, грузим в форму
+                        if(flag) {
                             m.addBook(new Book(bookName.getText(), edition.getText(), (Genre) genre.getSelectedItem(),new Author(authorName.getText(), email.getText(), (Gender)gender.getSelectedItem()), pr, q));
                             dialog.dispose();
                         }
@@ -317,57 +313,52 @@ public class Swing extends JFrame {
                 });
 
                 dialog.add(ok,BorderLayout.SOUTH);
-                dialog.setVisible(true);//отрисовываем
+                dialog.setVisible(true);
             }
         });
 
-        grid.add(create); //добавляем в грид кнопочки
+        grid.add(create);
         grid.add(change);
         grid.add(delete);
 
-
-
-
-
-
-        JPanel flow = new JPanel(new FlowLayout(FlowLayout.CENTER)); //что такое jpalel
+        JPanel flow = new JPanel(new FlowLayout(FlowLayout.CENTER));
         flow.add(grid);
         add(flow, BorderLayout.EAST);
 
-        JMenuBar menu = new JMenuBar(); //создаем меню сверху
-        JMenu file = new JMenu("File"); //делаем вырадающий список
-        JMenuItem newFile = new JMenuItem("New"); //создаем вкладку NEW
+        JMenuBar menu = new JMenuBar();
+        JMenu file = new JMenu("File");
+        JMenuItem newFile = new JMenuItem("New");
         file.add(newFile); //добавляем NEW в FILE
-        newFile.addActionListener(new ActionListener() { //что происходит при вызове кнопки
+        newFile.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                final JDialog dialog = new JDialog(); //создаем диалоговое окно
+                final JDialog dialog = new JDialog();
                 dialog.setSize(350, 150);
                 dialog.setLocation(w + width/2 - dialog.getWidth()/2, h+height/2-dialog.getHeight()/2);
-                dialog.setTitle("New library:"); //называем его так
+                dialog.setTitle("New library:");
 
-                dialog.setModal(true); ///////////////////////////////////////////////////////////////////////это я хз для чего
+                dialog.setModal(true);
 
                 JPanel panel = new JPanel(new GridLayout(2, 1, 5, 5)); //заолняем его данными
-                panel.add(new JLabel("File name:"));  //вот там такое название
-                final JTextField text = new JTextField(); //поле
+                panel.add(new JLabel("File name:"));
+                final JTextField text = new JTextField();
                 panel.add(text);
-                JButton ok = new JButton("OK"); //кнопка
-                dialog.add(panel); //добавляем на окно нашу панель
-                dialog.add(ok,BorderLayout.SOUTH); //располагаем кнопку ОК на Юг
+                JButton ok = new JButton("OK");
+                dialog.add(panel);
+                dialog.add(ok,BorderLayout.SOUTH);
 
 
                 ok.addActionListener(new ActionListener() { //что будет при действии с кнопкой
                     @Override
                     public void actionPerformed(ActionEvent e) {
-                        if(!text.getText().isEmpty()) { //если мы что-то ввели
+                        if(!text.getText().isEmpty()) {
                             boolean flag = true;
                             try {
-                                m.newFile(text.getText()); //созаем новый файл с книгами
+                                m.newFile(text.getText());
 
-                                dialog.dispose();/////////////////////////////////////////////хз для чего это
+                                dialog.dispose();
 
-                            } catch (IOException ex){ //если у нас не создался файл, то мы выводим об этом уведдомление
+                            } catch (IOException ex){
                                 JDialog error = new JDialog();
                                 error.setSize(175, 150);
                                 error.setLocation(w + width/2 - error.getWidth()/2, h+height/2-error.getHeight()/2);
@@ -376,29 +367,29 @@ public class Swing extends JFrame {
                                 error.setVisible(true);
                                 flag = false;
                             }
-                            if (flag){ //если все ок, то активируем кнопки
+                            if (flag){
                                 create.setEnabled(true);
                                 delete.setEnabled(true);
                                 change.setEnabled(true);
-                                m.setFile(text.getText()+".txt"); //создаем файл в корневом диалоге формата txt
+                                m.setFile(text.getText()+".txt");
                             }
                         }
                     }
                 });
-                dialog.setVisible(true); //наше диалоговое окно теперь видно
+                dialog.setVisible(true);
             }
         });
 
-        JMenuItem open = new JMenuItem("Open"); //создаем OPEN
-        file.add(open); //добавляем в выпадающее меню OPEN
+        JMenuItem open = new JMenuItem("Open");
+        file.add(open);
 
-        open.addActionListener(new ActionListener() { //действия с OPEN
+        open.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 boolean flag = true;
-                m.clear(); ///////////////////////////////////////////////////////////////////очищаем
-                JFileChooser openFile = new JFileChooser(); //выбираем файл который хотим открыть
-                openFile.setCurrentDirectory(new File(".")); // короче эта поебень мне не нужна, сложно.
+                m.clear();
+                JFileChooser openFile = new JFileChooser();
+                openFile.setCurrentDirectory(new File(".")); 
                 int res = openFile.showDialog(null, "Open file");
                 if (res == JFileChooser.APPROVE_OPTION) {
                     File file = openFile.getSelectedFile();
@@ -422,19 +413,19 @@ public class Swing extends JFrame {
                 }
             }
         });
-        JMenuItem save = new JMenuItem("Save"); //сохраняем наш файлик
+        JMenuItem save = new JMenuItem("Save");
         file.add(save);
         save.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                m.saveFile(); //збс сохранили
+                m.saveFile();
             }
         });
 
-        menu.add(file); //добавляем в меню file
+        menu.add(file);
         setJMenuBar(menu);
 
-        setVisible(true); //и рисуем все это
+        setVisible(true);
 
     }
 

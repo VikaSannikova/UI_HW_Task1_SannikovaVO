@@ -5,7 +5,6 @@ import java.util.Objects;
 enum Gender{
     Man,
     Woman,
-    //Transgender
 }
 
 public class Author {

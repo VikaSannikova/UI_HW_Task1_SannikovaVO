@@ -11,9 +11,6 @@ import java.util.List;
 import java.util.Scanner;
 import java.util.StringTokenizer;
 
-/**
- * Created by Boris on 05.11.2017.
- */
 public class Library extends AbstractTableModel {
 
     private List<Book> books = new ArrayList<>();

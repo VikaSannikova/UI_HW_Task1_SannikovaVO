@@ -1,7 +1,5 @@
 package ui;
 
-import ui_BORIS.Gender;
-
 enum Genre{
     Fantasy,
     Classic,
