@@ -265,7 +265,7 @@ public class Swing extends JFrame {
                             JDialog error = new JDialog();
                             error.setSize(175, 150);
                             error.setLocation(w + width/2 - error.getWidth()/2, h+height/2-error.getHeight()/2);
-                            error.add(new JLabel("  Remained Empty Field!"));
+                            error.add(new JLabel("Empty fields!"));
                             error.setModal(true);
                             error.setVisible(true);
                             flag = false;
